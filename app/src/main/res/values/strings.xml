@@ -1,0 +1,54 @@
+<resources>
+    menu.getItem(0).setChecked(true);
+    <string name="title_register">Cadastro de filmes</string>
+    <string name="title_list">Filmes cadastrados</string>
+    <string name="title_edit">Edição do filme</string>
+    <string name="title_view">Visualização do filme</string>
+    <string name="txt_register_movie">Cadastrar filmes</string>
+    <string name="txt_list_movies">Listar filmes</string>
+    <string name="txt_change_theme">Atualizar Tema</string>
+    <string name="txt_title_movie">Nome do filme</string>
+    <string name="txt_rate">Nota</string>
+    <string name="txt_genre">Gênero</string>
+    <string name="txt_watched">Já assisti?</string>
+    <string name="txt_register">Cadastrar</string>
+    <string name="txt_action">Acão</string>
+    <string name="txt_adventure">Aventura</string>
+    <string name="txt_comedy">Comédia</string>
+    <string name="txt_drama">Drama</string>
+    <string name="txt_horror">Terror</string>
+    <string name="txt_romance">Romance</string>
+    <string name="txt_musical">Musical</string>
+    <string name="txt_sport">Esporte</string>
+    <string name="txt_war">Guerra</string>
+    <string name="txt_confirm">Confirme a ação</string>
+    <string name="txt_confirm_delete">Deseja realmente excluir esse filme?</string>
+    <string name="txt_update_toast">Alterado com sucesso!</string>
+    <string name="txt_alert">Alerta!</string>
+    <string name="txt_ok">Ok</string>
+    <string name="txt_no">Não</string>
+    <string name="txt_yes">Sim</string>
+    <string name="txt_alt">Sim</string>
+    <string name="txt_update">Atualizar filme</string>
+    <string name="txt_delete">Excluir</string>
+    <string name="txt_delete_toast">Filme excluído com sucesso!</string>
+    <string name="txt_edit">Editar</string>
+    <string name="txt_open">Abrir</string>
+    <string name="txt_active_edit_mode">Modo de ediçao ativado!</string>
+    <string name="txt_disable_edit_mode">Modo de ediçao desativado!</string>
+    <string name="alert_empty_name">O campo do nome está vazio!</string>
+    <string name="menu_dark_theme">Tema Dark</string>
+    <string name="menu_normal_theme">Tema Padrao</string>
+    <string name="toast_created">Criado com sucesso!</string>
+    <string name="menu_color_white">Branco</string>
+    <string name="menu_color_black">Preto</string>
+    <string name="theme" translatable="false">0</string>
+    <string name="app_name">MovieApp</string>
+    <string name="menu_info">Informações</string>
+    <string name="my_name_type">Nome:</string>
+    <string name="my_name_value" translatable="false">Vinicius Drago Romano</string>
+    <string name="info_label">Informações do Projeto</string>
+    <string name="info_value">Este projeto consiste em um cadastro de filmes, assistidos ou não, pelo usuário. Os filmes cadastrados podem ser consultados, atualizados (dependendo de sua necessidade) ou até mesmo deletados. Realizado na disciplina de Programação móvel na Universidade Tecnológica Federal do Paraná (UTFPR-CP).</string>
+    <string name="txt_back">Voltar</string>
+    <string name="txt_refresh">Atualize o tema para efetuar de fato a mudança</string>
+</resources>

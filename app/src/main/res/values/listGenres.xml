@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="genres">
+        <item>@string/txt_action</item>
+        <item>@string/txt_adventure</item>
+        <item>@string/txt_comedy</item>
+        <item>@string/txt_drama</item>
+        <item>@string/txt_horror</item>
+        <item>@string/txt_romance</item>
+        <item>@string/txt_musical</item>
+        <item>@string/txt_sport</item>
+        <item>@string/txt_war</item>
+    </string-array>
+</resources>
