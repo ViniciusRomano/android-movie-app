@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -49,6 +50,11 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit);
 
         setTitle(R.string.title_view);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         edtNome   = (EditText) findViewById(R.id.edtNome);
         rtgBar = (RatingBar) findViewById(R.id.ratingBar);
@@ -214,6 +220,9 @@ public class EditActivity extends AppCompatActivity {
                 return true;
             case R.id.itemDelele:
                 deleteMovie();
+                return true;
+            case android.R.id.home:
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

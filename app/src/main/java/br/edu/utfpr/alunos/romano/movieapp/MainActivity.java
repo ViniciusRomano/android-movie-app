@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        readColorPreference();
+        readThemePreference();
         changeTheme();
         setContentView(R.layout.activity_main);
     }
@@ -30,9 +29,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ListActivity.class);
         startActivity(intent);
     }
-    public void ActiveTheme(View view) {
-        recreate();
-    }
 //
     private void changeTheme() {
           if(option == 0){
@@ -40,14 +36,13 @@ public class MainActivity extends AppCompatActivity {
           }else{
               setTheme(R.style.DarkTheme);
           }
-          Toast.makeText(MainActivity.this, R.string.txt_refresh, Toast.LENGTH_SHORT).show();
     }
 
-    private void readColorPreference() {
+    private void readThemePreference() {
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.theme), Context.MODE_PRIVATE);
         option = sharedPref.getInt(getString(R.string.theme), option);
     }
-    private void saveColorPreference(int newValue) {
+    private void saveThemePreference(int newValue) {
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.theme), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt(getString(R.string.theme), newValue);
@@ -83,12 +78,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_normal_theme:
 //                option = R.style.AppTheme;
 //                MainActivity.this.recreate();
-                saveColorPreference(0);
+                saveThemePreference(0);
+                recreate();
                 return true;
             case R.id.menu_dark_theme:
 //                option = R.style.DarkTheme;
 //                MainActivity.this.recreate();
-                saveColorPreference(1);
+                saveThemePreference(1);
+                recreate();
                 return true;
             case R.id.menu_info:
                 Intent intent = new Intent(this, InfoActivity.class);

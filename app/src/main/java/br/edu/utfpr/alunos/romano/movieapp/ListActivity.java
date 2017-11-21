@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,6 +31,11 @@ public class ListActivity extends AppCompatActivity {
         changeTheme();
         setContentView(R.layout.activity_list);
         setTitle(R.string.title_list);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         lvMovies = (ListView) findViewById(R.id.lvmovies);
         createList();
@@ -65,10 +72,10 @@ public class ListActivity extends AppCompatActivity {
         this.createList();
     }
 
-    private void createList(){
+    private void createList() {
 
         lvMovies = (ListView) findViewById(R.id.lvmovies);
-        List <Movies> listMovies = null;
+        List<Movies> listMovies = null;
         try {
             DatabaseHelper conexao = DatabaseHelper.getInstance(this);
 
@@ -86,31 +93,17 @@ public class ListActivity extends AppCompatActivity {
                 listMovies);
 
         lvMovies.setAdapter(listAdapter);
-//        lvMovies = (ListView) findViewById(R.id.lvmovies);
-//        List <Movies> listMovies = null;
-//        try {
-//            DatabaseHelper conexao = DatabaseHelper.getInstance(this);
-//
-//            listMovies = conexao.getMovieDao()
-//                    .queryBuilder()
-//                    .orderBy("name", true)
-//                    .query();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        ArrayList<String> listTitles = new ArrayList<String>();
-//
-//        for (int i = 0; i < listMovies.size(); i++) {
-//            System.out.println(listMovies.get(i).getName());
-//            listTitles.add(listMovies.get(i).getId()+" - "+listMovies.get(i).getName());
-//        }
-//
-//        listAdapter = new ArrayAdapter<String>(ListActivity.this,
-//                android.R.layout.simple_list_item_1,
-//                listTitles);
-//
-//        lvMovies.setAdapter(listAdapter);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()){
+
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
