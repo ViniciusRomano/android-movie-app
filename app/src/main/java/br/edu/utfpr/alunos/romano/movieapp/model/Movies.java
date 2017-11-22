@@ -19,8 +19,8 @@ public class Movies {
     @DatabaseField
     private float score;
 
-    @DatabaseField
-    private String genre;
+    @DatabaseField(foreign = true)
+    private Genres genre;
 
     @DatabaseField
     private boolean watched;
@@ -28,7 +28,7 @@ public class Movies {
     public Movies(){
     }
 
-    public Movies(int id, String name, float score, String genre, boolean watched) {
+    public Movies(int id, String name, float score, Genres genre, boolean watched) {
         this.id = id;
         this.name = name;
         this.score = score;
@@ -61,11 +61,11 @@ public class Movies {
         this.score = score;
     }
 
-    public String getGenre() {
+    public Genres getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(Genres genre) {
         this.genre = genre;
     }
 

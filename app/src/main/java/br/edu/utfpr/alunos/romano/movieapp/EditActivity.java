@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -20,7 +21,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.sql.SQLException;
+import java.util.List;
 
+import br.edu.utfpr.alunos.romano.movieapp.model.Genres;
 import br.edu.utfpr.alunos.romano.movieapp.model.Movies;
 import br.edu.utfpr.alunos.romano.movieapp.persistence.DatabaseHelper;
 import br.edu.utfpr.alunos.romano.movieapp.utils.UGui;
@@ -40,6 +43,8 @@ public class EditActivity extends AppCompatActivity {
     private Button btnUpdate;
     private int movieId;
     private ListView lvMovies;
+    private List<Genres> listGenres;
+    ArrayAdapter<Genres> listAdapter;
     private static boolean EDIT_MODE = false;
     private int option = 0;
     @Override
@@ -73,6 +78,7 @@ public class EditActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         movieId = bundle.getInt("movieId");
+        popularSpinner();
         populate(movieId);
     }
     private void changeTheme() {
@@ -96,24 +102,41 @@ public class EditActivity extends AppCompatActivity {
             movie = conexao.getMovieDao().queryForId(movieId);
             edtNome.setText(movie.getName());
             rtgBar.setRating(movie.getScore());
-            spnrGenre.setSelection(getIndex(spnrGenre, movie.getGenre()));
+            Toast.makeText(EditActivity.this, Integer.toString(movie.getGenre().getId()), Toast.LENGTH_SHORT).show();
+            spnrGenre.setSelection(posicaoTipo(movie.getGenre()));
             cbWatched.setChecked(movie.isWatched());
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    private int getIndex(Spinner spinner, String myString)
-    {
-        int index = 0;
+//    private int getIndex(Spinner spinner, Genres myGenre)
+//    {
+//        int index = 0;
+//
+//        for (int i=0;i<spinner.getCount();i++){
+//            Genres newGenre =  new Genres();
+//            newGenre = (Genres) spinner.getSelectedItemPosition(i);
+//            if (newGenre.getId() == myGenre.getId()){
+//                index = i;
+//                break;
+//            }
+//        }
+//        return index;
+//    }
 
-        for (int i=0;i<spinner.getCount();i++){
-            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
-                index = i;
-                break;
+    private int posicaoTipo(Genres tipo){
+
+        for (int pos = 0; pos < listGenres.size(); pos++){
+
+            Genres t = listGenres.get(pos);
+
+            if (t.getId() == tipo.getId()){
+                return pos;
             }
         }
-        return index;
+
+        return -1;
     }
 
     public void updateMovie(View view){
@@ -125,7 +148,7 @@ public class EditActivity extends AppCompatActivity {
             return;
         }
         movie.setName(String.valueOf(edtNome.getText()));
-        movie.setGenre(spnrGenre.getSelectedItem().toString());
+        movie.setGenre((Genres) spnrGenre.getSelectedItem());
         movie.setWatched(cbWatched.isChecked());
         movie.setScore(rtgBar.getRating());
 
@@ -204,7 +227,28 @@ public class EditActivity extends AppCompatActivity {
 //            e.printStackTrace();
 //        }
     }
+    private void popularSpinner(){
 
+        listGenres = null;
+
+        try {
+            DatabaseHelper conexao = DatabaseHelper.getInstance(this);
+
+            listGenres = conexao.getGenreDao()
+                    .queryBuilder()
+                    .orderBy("genre", true)
+                    .query();
+
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+        }
+
+        ArrayAdapter<Genres> spinnerAdapter = new ArrayAdapter<Genres>(this,
+                android.R.layout.simple_list_item_1,
+                listGenres);
+
+        spnrGenre.setAdapter(spinnerAdapter);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.selected_item, menu);
